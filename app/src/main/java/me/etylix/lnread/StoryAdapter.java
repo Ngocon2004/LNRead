@@ -14,14 +14,12 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-import me.etylix.lnread.ui.MyOnClickListener;
 import me.etylix.lnread.ui.home.HomeFragment;
 
 public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> {
     Context context;
     List<Story> storyData;
     RecyclerView rvStory;
-    final View.OnClickListener onClickListener = new MyOnClickListener();
 
     public StoryAdapter(Context context, List<Story> storyData){
         this.context = context;

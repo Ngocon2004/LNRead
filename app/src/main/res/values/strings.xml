@@ -3,4 +3,5 @@
     <string name="title_home">Trang chính</string>
     <string name="title_dashboard">Thể loại</string>
     <string name="title_notifications">Tuỳ chọn</string>
+    <string name="label_search">Tìm kiếm</string>
 </resources>
