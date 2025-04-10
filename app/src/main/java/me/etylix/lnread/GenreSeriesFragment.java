@@ -4,10 +4,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
 import java.util.List;
 import retrofit2.Call;
@@ -17,6 +18,7 @@ import retrofit2.Response;
 public class GenreSeriesFragment extends Fragment implements SeriesAdapter.OnSeriesClickListener {
 
     private RecyclerView rvSeries;
+    private TextView tvGenreTitle; // To display the genre name
     private SeriesAdapter seriesAdapter;
     private List<Series> seriesList = new ArrayList<>();
     private String genre;
@@ -31,11 +33,15 @@ public class GenreSeriesFragment extends Fragment implements SeriesAdapter.OnSer
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_genre_series, container, false);
 
-        rvSeries = view.findViewById(R.id.rv_new_series);
-        rvSeries.setLayoutManager(new LinearLayoutManager(getContext()));
+        tvGenreTitle = view.findViewById(R.id.tv_genre_title);
+        rvSeries = view.findViewById(R.id.rv_series);
 
+        // Set the genre title
+        tvGenreTitle.setText("Thể loại: " + genre);
+
+        rvSeries.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         seriesAdapter = new SeriesAdapter(getContext(), seriesList, this);
         rvSeries.setAdapter(seriesAdapter);
 
@@ -53,17 +59,22 @@ public class GenreSeriesFragment extends Fragment implements SeriesAdapter.OnSer
                 if (response.isSuccessful() && response.body() != null) {
                     seriesList.clear();
                     for (Series series : response.body()) {
-                        if (series.getSeriesGenre().contains(genre)) {
+                        if (series.getSeriesGenre() != null && series.getSeriesGenre().contains(genre)) {
                             seriesList.add(series);
                         }
                     }
                     seriesAdapter.notifyDataSetChanged();
+                    if (seriesList.isEmpty()) {
+                        Toast.makeText(getContext(), "Không có truyện nào thuộc thể loại " + genre, Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(getContext(), "Không thể tải danh sách truyện", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<List<Series>> call, Throwable t) {
-                // Handle error
+                Toast.makeText(getContext(), "Lỗi kết nối: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

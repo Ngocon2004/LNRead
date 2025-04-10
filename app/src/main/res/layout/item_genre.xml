@@ -3,14 +3,19 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:padding="8dp"
+    android:gravity="center">
 
     <TextView
         android:id="@+id/tv_genre_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="135dp"
+        android:layout_height="110dp"
         android:text="Genre"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:background="@drawable/rounded_fill"
+        android:textColor="?attr/colorOnPrimary"
+        android:padding="10dp"
+        android:gravity="bottom|right"/>
 
 </LinearLayout>

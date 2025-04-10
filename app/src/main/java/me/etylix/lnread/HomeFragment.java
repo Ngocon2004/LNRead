@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -48,6 +50,7 @@ public class HomeFragment extends Fragment implements SeriesAdapter.OnSeriesClic
             @Override
             public void onResponse(Call<List<Series>> call, Response<List<Series>> response) {
                 if (response.isSuccessful() && response.body() != null) {
+                    Toast.makeText(getContext(), "URL hợp lệ", Toast.LENGTH_SHORT).show();
                     seriesList.clear();
                     seriesList.addAll(response.body());
                     newSeriesAdapter.notifyDataSetChanged();
@@ -57,7 +60,7 @@ public class HomeFragment extends Fragment implements SeriesAdapter.OnSeriesClic
 
             @Override
             public void onFailure(Call<List<Series>> call, Throwable t) {
-                // Handle error
+                Toast.makeText(getContext(), "URL không hợp lệ", Toast.LENGTH_SHORT).show();
             }
         });
     }
