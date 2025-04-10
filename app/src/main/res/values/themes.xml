@@ -1,8 +1,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.LNRead" parent="Theme.MaterialComponents.Light">
+    <style name="Theme.LNRead" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#7AAAEA</item>
+        <item name="colorPrimary">@android:color/black</item>
         <item name="colorPrimaryVariant">#7AAAEA</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
@@ -12,7 +12,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-        <!--  This will change ActionBar BackgroundColor to Black -->
-
+        <item name="fontFamily">@font/oppo_sans_30</item>
+        <item name="android:textColor">@android:color/black</item>
     </style>
 </resources>
