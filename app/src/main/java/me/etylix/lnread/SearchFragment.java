@@ -39,7 +39,9 @@ public class SearchFragment extends Fragment implements SeriesAdapter.OnSeriesCl
 
         etSearch.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // Not used
+            }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -76,7 +78,8 @@ public class SearchFragment extends Fragment implements SeriesAdapter.OnSeriesCl
     private void filterSeries(String query) {
         filteredList.clear();
         if (query.isEmpty()) {
-            filteredList.addAll(seriesList);
+//            filteredList.addAll(seriesList);
+            //Show all series
         } else {
             for (Series series : seriesList) {
                 if (series.getSeriesName().toLowerCase().contains(query.toLowerCase()) ||
