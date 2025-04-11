@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
@@ -30,7 +31,8 @@ public class HomeFragment extends Fragment implements SeriesAdapter.OnSeriesClic
         rvPopularSeries = view.findViewById(R.id.rv_popular_series);
 
         rvNewSeries.setLayoutManager(new LinearLayoutManager(getContext()));
-        rvPopularSeries.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false));
+        rvPopularSeries.setLayoutManager(new
+                GridLayoutManager(this.getContext(), 2));
 
         newSeriesAdapter = new SeriesAdapter(getContext(), seriesList, this);
         popularSeriesAdapter = new SeriesAdapter(getContext(), seriesList, this);

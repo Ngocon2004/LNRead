@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
@@ -41,7 +42,7 @@ public class GenreSeriesFragment extends Fragment implements SeriesAdapter.OnSer
         // Set the genre title
         tvGenreTitle.setText("Thể loại: " + genre);
 
-        rvSeries.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        rvSeries.setLayoutManager(new GridLayoutManager(this.getContext(), 2));
         seriesAdapter = new SeriesAdapter(getContext(), seriesList, this);
         rvSeries.setAdapter(seriesAdapter);
 

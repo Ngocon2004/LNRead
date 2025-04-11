@@ -12,7 +12,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-        <item name="fontFamily">@font/oppo_sans_30</item>
+        <item name="fontFamily">@font/oppo_sans_40</item>
         <item name="android:textColor">@android:color/black</item>
     </style>
 </resources>
