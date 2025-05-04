@@ -55,7 +55,7 @@ public class FavoritesFragment extends Fragment implements SeriesAdapter.OnSerie
     }
 
     private void fetchSeries() {
-        ApiService apiService = RetrofitClient.getClient().create(ApiService.class); // Giả định RetrofitClient được định nghĩa
+        ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
         Call<List<Series>> call = apiService.getSeries();
         call.enqueue(new Callback<List<Series>>() {
             @Override
