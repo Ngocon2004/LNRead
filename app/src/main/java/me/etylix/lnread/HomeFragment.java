@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -22,11 +23,13 @@ public class HomeFragment extends Fragment implements SeriesAdapter.OnSeriesClic
     private RecyclerView rvNewSeries, rvPopularSeries;
     private SeriesAdapter newSeriesAdapter, popularSeriesAdapter;
     private List<Series> seriesList = new ArrayList<>();
+    ProgressBar progressBar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
+        progressBar = view.findViewById(R.id.progress_bar);
         rvNewSeries = view.findViewById(R.id.rv_new_series);
         rvPopularSeries = view.findViewById(R.id.rv_popular_series);
 
@@ -57,6 +60,7 @@ public class HomeFragment extends Fragment implements SeriesAdapter.OnSeriesClic
                     seriesList.addAll(response.body());
                     newSeriesAdapter.notifyDataSetChanged();
                     popularSeriesAdapter.notifyDataSetChanged();
+                    progressBar.setVisibility(View.GONE);
                 }
             }
 

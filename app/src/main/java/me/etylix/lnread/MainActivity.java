@@ -14,6 +14,8 @@ import androidx.room.Room;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.concurrent.TimeUnit;
+
 import me.etylix.lnread.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         EdgeToEdge.enable(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
