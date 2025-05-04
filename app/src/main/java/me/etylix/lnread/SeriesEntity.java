@@ -1,6 +1,5 @@
 package me.etylix.lnread;
 
-
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 

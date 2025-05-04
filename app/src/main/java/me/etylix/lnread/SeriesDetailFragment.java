@@ -1,5 +1,7 @@
 package me.etylix.lnread;
 
+import static me.etylix.lnread.WebViewHelper.openInWebView;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +14,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 
 public class SeriesDetailFragment extends Fragment {
 
@@ -43,7 +47,7 @@ public class SeriesDetailFragment extends Fragment {
         rvChapters = view.findViewById(R.id.rv_chapters);
 
         // Set data
-        Glide.with(this).load(series.getSeriesImg()).into(ivSeriesImage);
+        Glide.with(this).load(series.getSeriesImg()).apply(new RequestOptions().transform(new RoundedCorners(37))).into(ivSeriesImage);
         tvSeriesName.setText(series.getSeriesName());
         tvSeriesAuthor.setText(series.getSeriesAuthor());
         tvSeriesPlot.setText(series.getSeriesPlot());
@@ -53,16 +57,13 @@ public class SeriesDetailFragment extends Fragment {
         rvChapters.setLayoutManager(new LinearLayoutManager(getContext()));
         chapterAdapter = new ChapterAdapter(getContext(), series.getSeriesChapter());
         rvChapters.setAdapter(chapterAdapter);
+        chkFavorite();
 
         // Read button (opens the first chapter in a Custom Tab)
         btnRead.setOnClickListener(v -> {
             if (series.getSeriesChapter() != null && !series.getSeriesChapter().isEmpty()) {
                 String chapterUrl = series.getSeriesChapter().get(0).getURL();
-                if (CustomTabHelper.isValidUrl(chapterUrl)) {
-                    CustomTabHelper.launchCustomTab(getContext(), chapterUrl);
-                } else {
-                    Toast.makeText(getContext(), "URL không hợp lệ", Toast.LENGTH_SHORT).show();
-                }
+                WebViewHelper.openInWebView(getActivity(), getParentFragmentManager(), chapterUrl, R.id.fragment_container);
             } else {
                 Toast.makeText(getContext(), "Không có chương nào để đọc", Toast.LENGTH_SHORT).show();
             }
@@ -81,12 +82,11 @@ public class SeriesDetailFragment extends Fragment {
                     seriesEntity.setSeriesPlot(series.getSeriesPlot());
                     ((MainActivity) getActivity()).getDatabase().seriesDao().insert(seriesEntity);
                     getActivity().runOnUiThread(() -> Toast.makeText(getContext(), "Đã lưu vào yêu thích", Toast.LENGTH_SHORT).show());
-                    getActivity().runOnUiThread(() -> btnFavorite.setText("Yêu thích"));
                 } else {
                     ((MainActivity) getActivity()).getDatabase().seriesDao().deleteBySeriesName(series.getSeriesName());
                     getActivity().runOnUiThread(() -> Toast.makeText(getContext(), "Đã xóa khỏi yêu thích", Toast.LENGTH_SHORT).show());
-                    getActivity().runOnUiThread(() -> btnFavorite.setText("Bỏ Yêu thích"));
                 }
+                chkFavorite();
             }).start();
         });
 
@@ -99,15 +99,15 @@ public class SeriesDetailFragment extends Fragment {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    if (existingSeries == null) {
-                        btnFavorite.setText("Yêu thích");
+                    if (existingSeries != null) {
+                        btnFavorite.setText("Bỏ yêu thích");
                     }
                     else {
-                        btnFavorite.setText("Bỏ yêu thích");
+                        btnFavorite.setText("Yêu thích");
                     }
                 }
             });
-            
+
         }).start();
     }
 }

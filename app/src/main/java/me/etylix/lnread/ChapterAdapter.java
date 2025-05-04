@@ -1,12 +1,14 @@
 package me.etylix.lnread;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
@@ -32,11 +34,7 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ChapterV
         holder.tvChapterName.setText(chapter.getName());
         holder.itemView.setOnClickListener(v -> {
             String chapterUrl = chapter.getURL();
-            if (CustomTabHelper.isValidUrl(chapterUrl)) {
-                CustomTabHelper.launchCustomTab(context, chapterUrl);
-            } else {
-                Toast.makeText(context, "URL không hợp lệ", Toast.LENGTH_SHORT).show();
-            }
+            WebViewHelper.openInWebView((FragmentActivity) context, ((FragmentActivity) context).getSupportFragmentManager(), chapterUrl, R.id.fragment_container);
         });
     }
 

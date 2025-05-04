@@ -9,6 +9,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
+
 import java.util.List;
 
 public class SeriesAdapter extends RecyclerView.Adapter<SeriesAdapter.SeriesViewHolder> {
@@ -38,8 +41,7 @@ public class SeriesAdapter extends RecyclerView.Adapter<SeriesAdapter.SeriesView
         Series series = seriesList.get(position);
         holder.tvSeriesName.setText(series.getSeriesName());
         holder.tvSeriesAuthor.setText(series.getSeriesAuthor());
-        Glide.with(context).load(series.getSeriesImg()).into(holder.ivSeriesImage);
-
+        Glide.with(context).load(series.getSeriesImg()).apply(new RequestOptions().transform(new RoundedCorners(37))).into(holder.ivSeriesImage);
         holder.itemView.setOnClickListener(v -> listener.onSeriesClick(series));
     }
 

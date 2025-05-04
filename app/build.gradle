@@ -42,6 +42,7 @@ dependencies {
     implementation libs.navigation.ui
     implementation libs.retrofit
     implementation libs.browser
+    implementation libs.volley
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core

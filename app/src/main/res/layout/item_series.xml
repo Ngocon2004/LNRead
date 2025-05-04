@@ -9,7 +9,7 @@
     <ImageView
         android:id="@+id/iv_series_image"
         android:layout_width="150dp"
-        android:layout_height="230dp"
+        android:layout_height="200dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,7 +23,8 @@
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_series_image" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_series_image"
+        android:paddingTop="2dp"/>
 
     <TextView
         android:id="@+id/tv_series_author"

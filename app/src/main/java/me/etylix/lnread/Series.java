@@ -24,7 +24,6 @@ public class Series implements Serializable {
     @SerializedName("series-chapter")
     private List<Chapter> seriesChapter;
 
-    // Getters and Setters
     public String getSeriesName() { return seriesName; }
     public void setSeriesName(String seriesName) { this.seriesName = seriesName; }
     public String getSeriesImg() { return seriesImg; }

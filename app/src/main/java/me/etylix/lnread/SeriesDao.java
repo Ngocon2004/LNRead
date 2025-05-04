@@ -18,4 +18,7 @@ public interface SeriesDao {
 
     @Query("SELECT * FROM favorite_series WHERE seriesName = :seriesName")
     SeriesEntity getSeriesByName(String seriesName);
+
+    @Query("SELECT * FROM favorite_series")
+    List<SeriesEntity> getAllSeries();
 }
