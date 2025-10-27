@@ -73,17 +73,17 @@ public class SeriesDetailFragment extends Fragment {
 
         btnFavorite.setOnClickListener(v -> {
             new Thread(() -> {
-                SeriesEntity existingSeries = ((MainActivity) getActivity()).getDatabase().seriesDao().getSeriesByName(series.getSeriesName());
+                SeriesEntity existingSeries = DatabaseSingleton.getInstance(getContext()).getDatabase().seriesDao().getSeriesByName(series.getSeriesName());
                 if (existingSeries == null) {
                     SeriesEntity seriesEntity = new SeriesEntity();
                     seriesEntity.setSeriesName(series.getSeriesName());
                     seriesEntity.setSeriesImg(series.getSeriesImg());
                     seriesEntity.setSeriesAuthor(series.getSeriesAuthor());
                     seriesEntity.setSeriesPlot(series.getSeriesPlot());
-                    ((MainActivity) getActivity()).getDatabase().seriesDao().insert(seriesEntity);
+                    DatabaseSingleton.getInstance(getContext()).getDatabase().seriesDao().insert(seriesEntity);
                     getActivity().runOnUiThread(() -> Toast.makeText(getContext(), "Đã lưu vào yêu thích", Toast.LENGTH_SHORT).show());
                 } else {
-                    ((MainActivity) getActivity()).getDatabase().seriesDao().deleteBySeriesName(series.getSeriesName());
+                    DatabaseSingleton.getInstance(getContext()).getDatabase().seriesDao().deleteBySeriesName(series.getSeriesName());
                     getActivity().runOnUiThread(() -> Toast.makeText(getContext(), "Đã xóa khỏi yêu thích", Toast.LENGTH_SHORT).show());
                 }
                 chkFavorite();
@@ -95,7 +95,7 @@ public class SeriesDetailFragment extends Fragment {
 
     private void chkFavorite() {
         new Thread(() -> {
-            SeriesEntity existingSeries = ((MainActivity) getActivity()).getDatabase().seriesDao().getSeriesByName(series.getSeriesName());
+            SeriesEntity existingSeries = DatabaseSingleton.getInstance(getContext()).getDatabase().seriesDao().getSeriesByName(series.getSeriesName());
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {

@@ -49,7 +49,7 @@ public class HomeFragment extends Fragment implements SeriesAdapter.OnSeriesClic
     }
 
     private void fetchSeries() {
-        ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
+        ApiService apiService = RetrofitClient.getInstance().getRetrofit().create(ApiService.class);
         Call<List<Series>> call = apiService.getSeries();
         call.enqueue(new Callback<List<Series>>() {
             @Override

@@ -52,7 +52,7 @@ public class GenreSeriesFragment extends Fragment implements SeriesAdapter.OnSer
     }
 
     private void fetchSeriesByGenre() {
-        ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
+        ApiService apiService = RetrofitClient.getInstance().getRetrofit().create(ApiService.class);
         Call<List<Series>> call = apiService.getSeries();
         call.enqueue(new Callback<List<Series>>() {
             @Override

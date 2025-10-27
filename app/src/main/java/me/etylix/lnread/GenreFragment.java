@@ -39,7 +39,7 @@ public class GenreFragment extends Fragment implements GenreAdapter.OnGenreClick
     }
 
     private void fetchGenres() {
-        ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
+        ApiService apiService = RetrofitClient.getInstance().getRetrofit().create(ApiService.class);
         Call<List<Series>> call = apiService.getSeries();
         call.enqueue(new Callback<List<Series>>() {
             @Override

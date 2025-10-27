@@ -38,7 +38,7 @@ public class FavoritesFragment extends Fragment implements SeriesAdapter.OnSerie
 
     private void loadFavorites() {
         new Thread(() -> {
-            List<SeriesEntity> favorites = ((MainActivity) getActivity()).getDatabase().seriesDao().getAllSeries();
+            List<SeriesEntity> favorites = DatabaseSingleton.getInstance(getContext()).getDatabase().seriesDao().getAllSeries();
             getActivity().runOnUiThread(() -> {
                 filteredList.clear();
                 for (SeriesEntity seriesEntity : favorites) {
@@ -55,7 +55,7 @@ public class FavoritesFragment extends Fragment implements SeriesAdapter.OnSerie
     }
 
     private void fetchSeries() {
-        ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
+        ApiService apiService = RetrofitClient.getInstance().getRetrofit().create(ApiService.class);
         Call<List<Series>> call = apiService.getSeries();
         call.enqueue(new Callback<List<Series>>() {
             @Override

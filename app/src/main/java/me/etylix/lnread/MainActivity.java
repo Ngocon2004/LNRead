@@ -10,11 +10,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentContainerView;
-import androidx.room.Room;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import java.util.concurrent.TimeUnit;
 
 import me.etylix.lnread.databinding.ActivityMainBinding;
 
@@ -41,8 +38,8 @@ public class MainActivity extends AppCompatActivity {
             return WindowInsetsCompat.CONSUMED;
         });
 
-        database = Room.databaseBuilder(getApplicationContext(),
-                AppDatabase.class, "series-database").build();
+        // Initialize database singleton
+        database = DatabaseSingleton.getInstance(getApplicationContext()).getDatabase();
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
